@@ -1,0 +1,67 @@
+<div *ngIf="termNon.languageCode != null && termNon.languageCode.length != 0; else elseBlock">
+  <h3>Non-English term detail - {{termNon.wordNonEnglish}}
+    <span><br>(Language code {{termNon.languageCode}} for <i>{{termNon.wordEnglish}}</i>)</span>
+  </h3>
+</div>
+<ng-template #elseBlock>
+  <h3>Non-English term detail - {{termNon.wordNonEnglish}}</h3>
+</ng-template>
+<p>&nbsp;</p>
+
+<div class="row" *ngIf="termNon">
+  <div class="col-md-10 col-sm-10">
+    <dl class="dl-horizontal">
+      <dt>Definitions<br>({{termNon.definitions.length}})<br><br>
+        <a class="btn btn-primary btn-sm" href="/termsOther/add-definition/{{termNon._id}}">Add another</a></dt>
+
+      <dd *ngFor="let d of termNon.definitions">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <button class="btn btn-default btn-sm" (click)="incrementLikeDefinition(d._id)">Like&nbsp;&nbsp;
+              <span class="badge">{{d.likes}}</span></button>&nbsp;&nbsp;Author: {{d.authorName}} on
+            {{d.dateCreated | date:"yyyy-MM-dd"}} </div>
+          <div class="panel-body"> {{d.definition}} </div>
+        </div>
+
+      </dd>
+      <dt>Field of study</dt>
+      <dd>
+        <p>{{termNon.fieldOfStudy}}</p>
+      </dd>
+      <dt>Author name</dt>
+      <dd>
+        <p>{{termNon.authorName}}</p>
+      </dd>
+      <dt>Dates</dt>
+      <dd>Created {{termNon.dateCreated}}<br>Revised {{termNon.dateRevised}}
+      </dd><br>
+
+      <div>
+        <dt *ngIf="termNon.linkWikipedia || termNon.linkYouTube || termNon.linkAuthoritative">Links</dt>
+        <dd>
+          <p>
+            <span *ngIf=" termNon.linkWikipedia"><a class="btn btn-default btn-sm" target="_blank"
+                href={{termNon.linkWikipedia}}>Wikipedia</a>&nbsp;&nbsp;</span>
+            <span *ngIf="termNon.linkYouTube"><a class="btn btn-default btn-sm" target="_blank"
+                href={{termNon.linkYouTube}}>YouTube</a>&nbsp;&nbsp;</span>
+            <span *ngIf="termNon.linkAuthoritative"><a class="btn btn-default btn-sm" target="_blank"
+                href={{termNon.linkAuthoritative}}>Authoritative</a>&nbsp;&nbsp;</span>
+          </p>
+        </dd>
+        <dt *ngIf="termNon.linkWikipedia || termNon.linkYouTube || termNon.linkAuthoritative">Was this helpful?</dt>
+        <dd>
+          <p *ngIf="termNon.linkWikipedia || termNon.linkYouTube || termNon.linkAuthoritative">
+            <button class="btn btn-default btn-sm" type="button" (click)="incrementHelpYes()">Yes&nbsp;&nbsp;<span
+                class="badge">{{termNon.helpYes}}</span></button>&nbsp;&nbsp;
+            <button class="btn btn-default btn-sm" type="button" (click)="incrementHelpNo()">No&nbsp;&nbsp;<span
+                class="badge">{{termNon.helpNo}}</span></button>&nbsp;&nbsp;
+          </p>
+        </dd>
+      </div>
+    </dl>
+  </div>
+</div>
+<!---->
+<div>
+  <hr><a class="btn btn-default" href="/termsEnglish/detail/{{termNon.termEnglishId}}">Back to English term</a></div>
+<!---->

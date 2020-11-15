@@ -1,0 +1,34 @@
+<h3 class="form-inline">List of English terms - search for... <input autofocus=""
+    class="form-control ng-untouched ng-pristine ng-valid" placeholder="(3 or more characters)" type="search"
+    [(ngModel)]="word" (ngModelChange)="searchEngTerm()">&nbsp;&nbsp;<a class="btn btn-primary"
+    routerLink="/termsEnglish/create">Add new</a></h3>
+
+<!-- ------------------------------Table ---------------------------- -->
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Word</th>
+        <th>Author</th>
+        <th>Definition</th>
+        <th class="col-md-2">Field of study</th>
+        <th class="col-md-1"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let t of termsEng">
+        <td *ngIf="t.definitions">{{t.wordEnglish}}</td>
+        <td *ngIf="t.definitions">{{ t.authorName }}</td>
+        <td *ngIf="t.definitions">
+          {{ t.definitions[0].definition }}
+          <span *ngIf="t.definitions.length - 1 > 0">
+            <br>
+            <i>• {{ t.definitions.length }} other definition(s)</i>
+          </span>
+        </td>
+        <td *ngIf="t.definitions">{{ t.fieldOfStudy }}</td>
+        <td><a routerLink="/termsEnglish/detail/{{ t._id }}" class="btn btn-default">Detail</a>&nbsp;</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

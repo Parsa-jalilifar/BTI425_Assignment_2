@@ -1,0 +1,79 @@
+<div class="row">
+  <div class="col-md-8">
+    <h3>Create a new English term</h3>
+    <p>Enter data, and click/tap the Save button</p>
+    <form (ngSubmit)="saveTerm()" #f='ngForm'>
+
+      <div class="form-group">
+        <label class="control-label" for="authorName">Author name:</label>
+        <input autofocus="" class="form-control" id="authorName" maxlength="100" minLength="3" name="authorName"
+          #authorName="ngModel" [(ngModel)]="term.authorName" required="">
+        <div *ngIf='authorName.invalid && (authorName.dirty || authorName.touched)' class='alert alert-danger'>
+          <div *ngIf='authorName.errors?.required'>Name is required, 3 to 100 characters</div>
+          <div *ngIf='authorName.errors?.minLength'>Name must be at least 3 characters</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" for="wordEnglish">Term or word in English:</label>
+        <input class="form-control" id="wordEnglish" maxlength="100" minLength="3" name="wordEnglish"
+          #wordEnglish="ngModel" [(ngModel)]="term.wordEnglish" required="">
+        <div *ngIf='wordEnglish.invalid && (wordEnglish.dirty || wordEnglish.touched)' class='alert alert-danger'>
+          <!-- The code below is situation-dependent - think before coding -->
+          <div *ngIf='wordEnglish.errors?.required'>Word is required, 3 to 100 characters</div>
+          <div *ngIf='wordEnglish.errors?.minLength'>Word must be at least 3 characters</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" for="wordExpanded">Expansion, if term or word (above) is an
+          acronym or initialism:</label>
+        <input class="form-control" id="wordExpanded" maxlength="100" minLength="3" name="wordExpanded"
+          [(ngModel)]="term.wordExpanded">
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" for="fos">Field of study:</label>
+        <input class="form-control" id="fos" maxlength="100" minLength="3" name="fos"
+          placeholder="e.g. Computer programming" #fieldOfStudy="ngModel" [(ngModel)]="term.fieldOfStudy" required="">
+        <div *ngIf='fieldOfStudy.invalid && (fieldOfStudy.dirty || fieldOfStudy.touched)' class='alert alert-danger'>
+          <div *ngIf='fieldOfStudy.errors?.required'>Word is required, 3 to 100 characters</div>
+          <div *ngIf='fieldOfStudy.errors?.minLength'>Word must be at least 3 characters</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" for="definition">Definition:</label>
+        <textarea class="form-control" id="definition" maxlength="5000" minLength="50" name="definition"
+          #definition="ngModel" [(ngModel)]="def.definition" required="" rows="5"></textarea>
+        <div *ngIf='definition.invalid && (definition.dirty || definition.touched)' class='alert alert-danger'>
+          <!-- The code below is situation-dependent - think before coding -->
+          <div *ngIf='definition.errors?.required'>Definition is required, 50 to 5000 characters</div>
+          <div *ngIf='definition.errors?.minLength'>Definition must be at least 50 characters</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" for="linkAuthoritative">Link (URL),authoritative:</label>
+        <input class="form-control" [(ngModel)]=" term.linkAuthoritative" id=" linkAuthoritative"
+          name="linkAuthoritative"
+          pattern="(http|https)://[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:/~+#()_-]*[\w@?^=%&amp;/~+#()_-])?" type="url">
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" for="linkWikipedia">Link (URL) on Wikipedia:</label>
+        <input class="form-control" [(ngModel)]="term.linkWikipedia" id="linkWikipedia" name="linkWikipedia"
+          pattern="(http|https)://[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:/~+#()_-]*[\w@?^=%&amp;/~+#()_-])?" type="url">
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" for="linkYouTube">Link (URL) on YouTube:</label>
+        <input class="form-control" [(ngModel)]="term.linkYouTube" id="linkYouTube" name="linkYouTube"
+          pattern="(http|https)://[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:/~+#()_-]*[\w@?^=%&amp;/~+#()_-])?" type="url">
+      </div>
+
+      <button class="btn btn-primary" type="submit" [disabled]="!f.form.valid">Save</button>&nbsp;
+      <a class="btn btn-default" routerLink="/termsEnglish" href="/termsEnglish">Back to list</a>
+    </form>
+  </div>
+</div>
