@@ -1,4 +1,4 @@
-# BTI425 Assignment 2
+# IT-Terminology-Angular-App
 
 The purpose or objective of the assignment is to create a substantial Angular app that interacts with a web API.
 
